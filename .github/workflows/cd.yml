@@ -18,7 +18,7 @@ jobs:
           key: ${{ secrets.UBUNTU_PRIVATE_KEY }}
           script-stop: true
           script: |
-            /home/ubuntu/ci-cd
+            cd /home/ubuntu/ci-cd
             git pull origin master
             docker compose down
             docker compose up -d --build
