@@ -5,13 +5,12 @@ on:
     branches:
       - main
 
-
 jobs:
   Deploy:
     runs-on: ubuntu-latest
     steps:
       - name: ssh 로 ubuntu 로 접속
-        uses: apple boy/ssh-action@v1.0.2
+        uses: appleboy/ssh-action@v1.0.2
         with:
           host: ${{ secrets.UBUNTU_HOST }}
           username: ${{ secrets.UBUNTU_USERNAME }}
