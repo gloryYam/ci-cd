@@ -14,13 +14,13 @@ services:
     image: mariadb
     environment:
       MARIADB_ROOT_PASSWORD: pwd123
-      MARIADB_DATABASE: mydb  # MySQL 최초 실행 시 mydb 라는 데이터베이스를 생성해준다
+      MARIADB_DATABASE: mydb  # mariadb 최초 실행 시 mydb 라는 데이터베이스를 생성해준다
     volumes:
       - ./maria_data:/etc/mysql/conf.d
     ports:
       - 3307:3306
     healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      test: ["CMD", "healthcheck.sh", "--connect", "--user=root", "--password=pwd123", "--database=mydb"]
       interval: 5s  # 5초 간격으로 체크
       retries: 10   # 10번까지 재시도
 
