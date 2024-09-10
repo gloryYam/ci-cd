@@ -20,5 +20,5 @@ jobs:
           script: |
             /home/ubuntu/ci-cd
             git pull origin master
-            docker-compose down
-            docker-compose up -d --build
+            docker compose down
+            docker compose up -d --build
