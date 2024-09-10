@@ -11,13 +11,19 @@ jobs:
     steps:
       - name: ssh 로 ubuntu 로 접속
         uses: appleboy/ssh-action@v1.0.2
+        env:
+          APPLICATION_PROPERTIES: ${{ secrets.APPLICATION_PROPERTIES }}
         with:
           host: ${{ secrets.UBUNTU_HOST }}
           username: ${{ secrets.UBUNTU_USERNAME }}
           key: ${{ secrets.UBUNTU_PRIVATE_KEY }}
+          envs: APPLICATION_PROPERTIES
           script-stop: true
           script: |
             cd /home/ubuntu/ci-cd
+            rm -rf src/main/resources/application.yml
             git pull origin master
+            echo "$APPLICATION_PROPERTIES" > src/main/resources/application.yml
             docker compose down
+            ./gradlew clean build
             docker compose up -d --build
