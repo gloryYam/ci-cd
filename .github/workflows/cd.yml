@@ -40,8 +40,8 @@ jobs:
       - name: Docker build & push to docker repo
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }}/directors-dev .
-          docker push ${{ secrets.DOCKER_REPO }}/directors-dev
+          docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }}/spring_server_image_repository .
+          docker push ${{ secrets.DOCKER_REPO }}/spring_server_image_repository
 
       - name: Deploy to server
         uses: appleboy/ssh-action@master
@@ -51,7 +51,7 @@ jobs:
           key: ${{ secrets.DOCKER_SSH_KEY }}
           script: |
             sudo docker compose down  
-            sudo docker pull ${{ secrets.DOCKER_REPO }}/directors-dev
+            sudo docker pull ${{ secrets.DOCKER_REPO }}/spring_server_image_repository
             docker compose up -d --build
             docker image prune -f
           
