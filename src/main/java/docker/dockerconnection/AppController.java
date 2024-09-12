@@ -16,3 +16,5 @@ public class AppController {
         redisTemplate.opsForValue().set("abc", "def");
         return "Hello World";
     }
+}
+
