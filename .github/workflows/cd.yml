@@ -23,7 +23,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-        name: Make application.yml
+      - name: Make application.yml
         run: |
           cd src\main\resources
           touch ./application.yml
