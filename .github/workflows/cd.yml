@@ -49,6 +49,7 @@ jobs:
           host: ${{ secrets.DOCKER_HOST }}
           username: ${{ secrets.DOCKER_USERNAME }}
           key: ${{ secrets.DOCKER_SSH_KEY }}
+          port: ${{ secrets.DOCKER_SSH_PORT }}
           script: |
             sudo docker compose down  
             sudo docker pull ${{ secrets.DOCKER_REPO }}/spring_server_image_repository
