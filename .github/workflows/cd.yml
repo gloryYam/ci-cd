@@ -47,7 +47,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DOCKER_HOST }}
-          username: ${{ secrets.DOCKER_USERNAME }}
+          username: ${{ secrets.DOCKER_USER }}
           key: ${{ secrets.DOCKER_SSH_KEY }}
           port: ${{ secrets.DOCKER_SSH_PORT }}
           script: |
