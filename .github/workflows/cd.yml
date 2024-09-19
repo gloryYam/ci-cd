@@ -44,7 +44,7 @@ jobs:
           docker push ${{ secrets.DOCKER_REPO }}/spring_server_image_repository
 
       - name: Deploy to server
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.3
         with:
           host: ${{ secrets.DOCKER_HOST }}
           username: ${{ secrets.DOCKER_USER }}
