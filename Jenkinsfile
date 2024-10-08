@@ -5,6 +5,7 @@ pipeline {
         repository = "gloryyam/ci_cd"
         DOCKERHUB_CREDENTIALS = credentials('DockerHub-Credentials')
         IMAGE_TAG = ""
+        SPRING_SERVER_IP = "54.180.212.28"
     }
 
     stages {
@@ -58,6 +59,19 @@ pipeline {
                 sh "docker push ${repository}:${IMAGE_TAG}"
             }
         }
+
+        stage('Deploy to Spring Server') {
+            steps {
+                script{
+                   sh """
+                   ssh -i StrictHostKeyChecking=no ec2-user@${SPRING_SERVER_IP} << EOF
+                   docker pull ${repository}:${IMAGE_TAG}
+                   docker stop spring-app || true
+                   docker rm spring-app || true
+                   docker run -d --name spring-app -p 8080:8080 ${repository}:${IMAGE_TAG}
+                   EOF
+                   """
+                }
 
         stage('Clean up') {
             steps {
